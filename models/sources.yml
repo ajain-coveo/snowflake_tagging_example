@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+    - name: example_source
+      description: This is a replica of the Postgres database used by our app
+      database: dbt_project_example_complete
+      schema: example_source
+      tables:
+          - name: customers
+            description: One record per customer.
+          - name: orders
+            description: One record per order. Includes cancelled and deleted orders.
