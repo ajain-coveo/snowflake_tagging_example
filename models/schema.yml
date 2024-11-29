@@ -3,14 +3,33 @@ version: 2
 models:
   - name: customers
     description: One record per customer
+    config:
+      meta:
+        database_tags:
+            DATA_PURGE_REQUIRED: "YES"
     columns:
       - name: customer_id
         description: Primary key
         tests:
           - unique
           - not_null
+      - name: first_name
+        description: First name of the customer
+        meta:
+            database_tags:
+                privacy_category: "IDENTIFIER"
+                semantic_category: "NAME"
+      - name: last_name
+        description: Last name of the customer
+        meta:
+            database_tags:
+                privacy_category: "IDENTIFIER"
+                semantic_category: "NAME"
       - name: first_order_date
         description: NULL when a customer has not yet placed an order.
+        meta:
+            database_tags:
+                COMMON_DATA_IDENTIFIER: "MAIN_TIMESTAMP"
 
   - name: stg_customers
     description: This model cleans up customer data

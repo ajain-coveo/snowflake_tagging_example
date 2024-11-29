@@ -32,3 +32,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   snowflake_tagging_example:
     +materialized: table
+
+vars:
+    common_tag_database: 'governance'
+    common_tag_schema: 'tags'
+
+on-run-end: "{{ snowflake_utils.apply_meta_as_tags(results) }}"
